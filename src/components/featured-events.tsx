@@ -1,12 +1,12 @@
 "use client";
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { sampleEvents } from '@/data/events';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, Clock, MapPin, Users, ExternalLink } from 'lucide-react';
+import { Calendar, Clock, MapPin, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -16,7 +16,7 @@ export function FeaturedEvents() {
     event => event.isHot || event.isNew || event.registrationClosingSoon
   );
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -27,7 +27,7 @@ export function FeaturedEvents() {
     }
   };
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { y: 50, opacity: 0 },
     visible: {
       y: 0,
@@ -39,7 +39,7 @@ export function FeaturedEvents() {
     }
   };
 
-  const getBadgeVariant = (event: any) => {
+  const getBadgeVariant = (event: { isHot?: boolean; isNew?: boolean; registrationClosingSoon?: boolean }) => {
     if (event.isHot) return { text: 'HOT', className: 'bg-red-500 hover:bg-red-600' };
     if (event.isNew) return { text: 'NEW', className: 'bg-green-500 hover:bg-green-600' };
     if (event.registrationClosingSoon) return { text: 'CLOSING SOON', className: 'bg-orange-500 hover:bg-orange-600' };
@@ -63,7 +63,7 @@ export function FeaturedEvents() {
             Featured Events
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Don't miss these trending and time-sensitive events happening soon
+            Don&apos;t miss these trending and time-sensitive events happening soon
           </p>
         </motion.div>
 
@@ -75,7 +75,7 @@ export function FeaturedEvents() {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {featuredEvents.map((event, index) => {
+          {featuredEvents.map((event) => {
             const badge = getBadgeVariant(event);
             
             return (
